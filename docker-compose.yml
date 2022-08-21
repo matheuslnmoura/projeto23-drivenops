@@ -20,5 +20,25 @@ services:
     env_file:
       - ./back-end/.env
 
+  react_drivenops_app: 
+    container_name: react_drivenOps_app
+    build: ./front-end
+    volumes:
+      - build_react:/var/www/html
+
+  nginx_drivenops_app: 
+    container_name: nginx_drivenOps_app
+    build: ./nginx
+    ports: 
+      - 8080:80
+    volumes: 
+      - build_react:/var/www/html
+    depends_on:
+      - db_drivenOps
+      - node_app_driven_ops
+      - react_drivenops_app
+
+
 volumes:
   pg_drivenOps:
+  build_react:
