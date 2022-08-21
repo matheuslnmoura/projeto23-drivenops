@@ -6,19 +6,19 @@ services:
     ports:
       - 1234:5432
     env_file:
-      - .env
+      - ./back-end/.env
     volumes:
       - pg_drivenOps:/var/lib/postgresql/data
 
   node_app_driven_ops:
     container_name: driven_ops
-    build: .
+    build: ./back-end
     ports:
       - 5000:5000
     depends_on:
       - db_drivenOps
     env_file:
-      - .env
+      - ./back-end/.env
 
 volumes:
   pg_drivenOps:
